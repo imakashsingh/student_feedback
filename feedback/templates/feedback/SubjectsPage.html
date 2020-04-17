@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subjects</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'feedback/css_bulma/bulma.min.css' %}">
+    <style>
+        .table, th, td {
+            border: 3px solid black;
+        }
+        .body
+        {
+            background-color : lightblue;
+        }
+        .college
+        {
+            color : red;
+        }
+        .topcorner{
+            position:absolute;
+            top:0;
+            right:0;
+        }
+        .table{
+            width : 40%;
+            border: 3px solid black;
+        }
+       tr:nth-child(even) {background-color: #f2f2f2;}
+    </style>
+</head>
+<body>
+<section class="hero is-primary is-bold">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Subjects
+      </h1>
+      <h2 class="subtitle">
+        You can add or delete subjects here
+      </h2>
+    </div>
+  </div>
+</section>
+<div class = "topcorner">
+    <a class="button is-danger" href="{% url 'delete_all' %}">Delete All Subjects</a>
+    <a class="button is-success" href="{% url 'add_subject' %}">Add Subject</a>
+    <a href="{% url 'logout' %}" class="button is-warning">Logout</a>
+</div>
+<div>
+    <br><br>
+</div>
+<table class="table" align = "center">
+    <tr>
+        <th align="center">Subject Name</th>
+        <th align="center">Options</th>
+    </tr>
+    {% for subjects in sub_list %}
+    <tr>
+        <td align="center">{{subjects}}</td>
+        <td align="center"><a href="{% url 'edit_subject' subjects %}" class="button is-success is-rounded is-outlined">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="{% url 'delete_subject' subjects  %}" class="button is-danger is-rounded is-outlined">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<div align="center">
+    <a class="button is-success" href="{% url 'session_started' %}">Start Taking Feedback</a>
+</div>
+</body>
+</html>

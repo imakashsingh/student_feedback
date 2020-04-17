@@ -1,0 +1,5 @@
+Subjects : 4
+OS
+CN
+CD
+DBMS

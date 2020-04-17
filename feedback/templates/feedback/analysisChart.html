@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+<h1>Result</h1>
+<img src="{% static 'feedback/def.png' %}" />
+<img src="{% static 'feedback/pie.png' %}" />
+
+{% for subject in subjects_list %}
+    <img src="{% static 'feedback/' %}{{subject}}.png" />
+{% endfor %}
+
+<img src="{% static 'feedback/survey.png' %}" />
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'feedback/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'feedback/css/style.css' %}">
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <form method="post" class="appointment-form" id="appointment-form">
+                {% csrf_token %}
+                <h2>Feedback Form</h2>
+                <div class="form-group-1">
+                    <input type="number" name="system_no" id="system_no" placeholder="System No" required />
+                    <div class="select-list" style="margin-bottom: 10px;">
+                        <select name="gender" id="gender">
+                            <option slected value="" disabled selected>Gender</option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                        </select>
+                    </div>
+
+                {% for subject in sub_list %}
+
+                    <div class="select-list" style="margin-bottom: 18px;">
+                        <select name="rt {{subject}}" id="rt {{subject}}">
+                            <option slected value="" disabled selected>Rating for {{subject}}</option>
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                        </select>
+                    </div>
+                    <textarea name="fd {{subject}}" id="fd {{subject}}" placeholder="Enter Feedback for {{subject}}" rows="6" cols="55"></textarea>
+                {% endfor %}
+                <div class="form-submit">
+                    <input type="submit" name="submit" id="submit" class="submit" value="Submit Feedback" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'feedback/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'feedback/js/main.js' %}"></script>
+</body>
+</html>
