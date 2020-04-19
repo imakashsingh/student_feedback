@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from student_feedback.settings import IMAGES_FOLDER,MODEL_FOLDER,CONFIG_FOLDER
 
 
 
@@ -52,8 +53,7 @@ def survey(results, category_names):
     ax.legend(ncol=len(category_names), bbox_to_anchor=(0, 1),
               loc='lower left', fontsize='small')
     plt.title('Frequency Of Rating Stars for each Subject',y=1.08)
-    plt.savefig('G://College Project//student_feedback//feedback//static//feedback//survey.png')
-
+    plt.savefig(IMAGES_FOLDER+'survey.png')
     #return fig, ax
 
 def pie_chart(labels,sizes,title,fname):
@@ -62,15 +62,17 @@ def pie_chart(labels,sizes,title,fname):
             shadow=True, startangle=90)
     ax1.axis('equal')
     plt.title(title)
-    plt.savefig('G://College Project//student_feedback//feedback//static//feedback//'+fname+'.png')
+    plt.savefig(IMAGES_FOLDER+fname+'.png')
 
 def bar_graph(xlabel,ylabel,title,fname):
     plt.figure(figsize=(7.0, 5.0))
     plt.bar(x=xlabel,height=ylabel,width=0.7,align='center')
     plt.title(title)
-    plt.savefig('G://College Project//student_feedback//feedback//static//feedback//'+fname+'.png')
+    plt.savefig(IMAGES_FOLDER+fname+'.png')
+
+
 def get_no_of_subjects():
-    file = open('G:\\College Project\\student_feedback\\feedback\\static\\feedback\\configuration\\config.txt', 'r')
+    file = open(CONFIG_FOLDER + 'config.txt', 'r')
     sub_cn = file.readline()
     sub_cn = sub_cn.strip()
     temp_list = sub_cn.split(':')
@@ -80,7 +82,7 @@ def get_no_of_subjects():
 
 def get_subjects_list():
     sub_list = []
-    file = open('G:\\College Project\\student_feedback\\feedback\\static\\feedback\\configuration\\config.txt', 'r')
+    file = open(CONFIG_FOLDER+'config.txt', 'r')
     file.readline()
     subs = file.readlines()
     for each_sub in subs:
@@ -96,7 +98,7 @@ def check_for_sub_dup(sub_name):
         return False
 
 def write_to_config(sub_count,sub_list):
-    file = open('G:\\College Project\\student_feedback\\feedback\\static\\feedback\\configuration\\config.txt', 'w')
+    file = open(CONFIG_FOLDER + 'config.txt', 'w')
     file.write('Subjects : '+(str(sub_count))+'\n')
     for sub in sub_list:
         file.write(sub+'\n')
@@ -156,9 +158,9 @@ class PerformAnalysis(LoginRequiredMixin,FormView):
     no_of_sub = get_no_of_subjects()
     sub_list = get_subjects_list()
     def get(self, request, *args, **kwargs):
-        with open('G://College Project//student_feedback//feedback//ml_model//model_vec', 'rb') as fv:
+        with open(MODEL_FOLDER+'model_vec', 'rb') as fv:
             vec = pickle.load(fv)
-        with open('G://College Project//student_feedback//feedback//ml_model//model_pickle', 'rb') as fm:
+        with open(MODEL_FOLDER+'model_pickle', 'rb') as fm:
             mp = pickle.load(fm)
         rating_frequency = [[0 for i in range(5) ] for j in range(PerformAnalysis.no_of_sub)]
         sub_pos_rat = PerformAnalysis.no_of_sub * [0]

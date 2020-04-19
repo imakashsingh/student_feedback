@@ -15,6 +15,12 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+settings_dir = os.path.dirname(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+IMAGES_FOLDER = os.path.join(PROJECT_ROOT, 'feedback/static/feedback/')
+CONFIG_FOLDER = os.path.join(PROJECT_ROOT, 'feedback/static/feedback/configuration/')
+MODEL_FOLDER = os.path.join(PROJECT_ROOT, 'feedback/ml_model/')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
