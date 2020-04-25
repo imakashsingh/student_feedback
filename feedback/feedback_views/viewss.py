@@ -220,8 +220,7 @@ class LoginView(FormView):
                 login(request,user)
                 return redirect('adminop')
             else:
-                messages.error(request, 'username or password not correct')
-                return redirect('loginerror')
+                return render(request,'feedback/LoginForm.html',{'form':form,'loginerror':'true','msg':'Username Or Password Incorrect'})
         else:
             form = AuthenticationForm()
             return render(request, 'feedback/LoginForm.html', {'form': form})
@@ -305,6 +304,3 @@ class SubjectOperations(LoginRequiredMixin,FormView):
                     write_to_config(len(sub_list), sub_list)
             return redirect('subjects')
 
-class LoginError(FormView):
-    def get(self, request, *args, **kwargs):
-        return render(request,template_name="feedback/Login_Failed.html",context={})

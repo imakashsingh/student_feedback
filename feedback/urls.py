@@ -15,5 +15,4 @@ urlpatterns = [
     path('sessionstarted',LandingPage.as_view(),name="session_started"),
     path('loginppage/',LoginView.as_view(),name = "login"),
     path('logoutppage/',logout_func,name = "logout"),
-    path('loginerror/',LoginError.as_view(),name="loginerror"),
 ]

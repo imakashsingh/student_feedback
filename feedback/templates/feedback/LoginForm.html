@@ -7,11 +7,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     <link rel="stylesheet" type="text/css" href="{% static 'feedback/css_bootstrap/bootstrap.min.css' %}">
 </head>
-<body style="background-color: #68B9E5;">
+<body style="background-image : url('/static/feedback/images/loginback.jpg');backgorund-size:comtain;">
 
 <div class="row" style="justify-content: center;margin-top: 100px;">
 	<aside class="col-lg-0">
-        <div class="card" style="width:330px;margin:20px;">
+        {% if loginerror %}
+        <div class="alert alert-danger">
+            <a class="close" href="{% url 'login' %}" data-dismiss="alert">×</a>
+            {{ msg }}
+        </div>
+        {% endif %}
+        <div class="card" style="width:330px;margin:20px;opacity: 0.92;">
         <article class="card-body">
             <h4 class="card-title text-center mb-4 mt-1">Admin Login</h4>
             <hr>
